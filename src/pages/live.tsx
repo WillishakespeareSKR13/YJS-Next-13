@@ -1,8 +1,10 @@
 import {
   AtomButton,
   AtomText,
+  AtomTextEditor,
   AtomWrapper,
   css,
+  useEditor,
   useTheme,
 } from "@stacklycore/ui";
 import Header from "../components/Header";
@@ -30,11 +32,23 @@ const ContainerCSS = css`
 const PageIndex = () => {
   const { key, toggle } = useTheme();
   const canvas = useRef(null);
-  const [socket, setSocket] = useAtom(socketAtom);
   const [input, setInput] = useAtom(inputAtom);
+  const [socket, setSocket] = useAtom(socketAtom);
   const [status, setStatus] = useAtom(statusAtom);
   const [clients, setClients] = useAtom(clientsAtom);
   const [doc, setDoc] = useAtom(docAtom);
+
+  const editor = useEditor({
+    content: input,
+    onUpdate: ({ editor }) => {
+      if (!doc) return;
+      doc.getMap("data").set("input", editor?.getHTML() ?? "");
+    },
+  });
+
+  useEffect(() => {
+    editor?.commands?.setContent(input);
+  }, [input]);
 
   useEffect(() => {
     if (!doc) {
@@ -44,6 +58,7 @@ const PageIndex = () => {
       if (!yMap.has("input")) {
         yMap.observe((event, transaction) => {
           setInput(yMap.get("input") as string);
+          console.log("input", yMap.get("input"), input);
         });
       }
       setDoc(_doc);
@@ -89,12 +104,6 @@ const PageIndex = () => {
 
   if (!socket) return <h1>Initializing provider...</h1>;
 
-  const onChange: React.ChangeEventHandler<HTMLTextAreaElement> = (e) => {
-    if (!doc) return;
-    const yMap = doc.getMap("data");
-    yMap.set("input", e.target.value ?? "");
-  };
-
   return (
     <AtomWrapper as="main" css={() => ContainerCSS}>
       <Header />
@@ -136,14 +145,8 @@ const PageIndex = () => {
             {status}
           </AtomText>
           <AtomText>{JSON.stringify(clients, null, 4)}</AtomText>
-          <textarea
-            name=""
-            id=""
-            cols={30}
-            rows={10}
-            value={input}
-            onChange={onChange}
-          ></textarea>
+          <AtomTextEditor editor={editor} />
+
           <AtomButton
             onClick={() => doc.getMap("data").set("input", `${Math.random()}`)}
           >
