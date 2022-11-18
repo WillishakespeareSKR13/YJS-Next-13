@@ -38,16 +38,19 @@ const PageIndex = () => {
   const [clients, setClients] = useAtom(clientsAtom);
   const [doc, setDoc] = useAtom(docAtom);
 
-  const editor = useEditor({
-    content: input,
-    onUpdate: ({ editor }) => {
-      if (!doc) return;
-      doc.getMap("data").set("input", editor?.getHTML() ?? "");
+  const editor = useEditor(
+    {
+      content: input,
+      onUpdate: ({ editor }) => {
+        if (!doc) return;
+        doc.getMap("data").set("input", editor?.getHTML() ?? "");
+      },
     },
-  });
+    [doc]
+  );
 
   useEffect(() => {
-    editor?.commands?.setContent(input);
+    editor?.commands?.setContent?.(input);
   }, [input]);
 
   useEffect(() => {
