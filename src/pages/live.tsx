@@ -53,7 +53,6 @@ const PageIndex = () => {
   useEffect(() => {
     if (!!doc && !socket) {
       console.log("setting providers");
-      fetch(`${config?.URL}`);
       const socketIOProvider = new SocketIOProvider(
         `${config?.WS_URL}`,
         "testing-doc",
