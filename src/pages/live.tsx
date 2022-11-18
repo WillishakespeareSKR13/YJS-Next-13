@@ -36,6 +36,8 @@ const PageIndex = () => {
   const [clients, setClients] = useAtom(clientsAtom);
   const [doc, setDoc] = useAtom(docAtom);
 
+  console.log(config);
+
   useEffect(() => {
     if (!doc) {
       console.log("setting doc");
