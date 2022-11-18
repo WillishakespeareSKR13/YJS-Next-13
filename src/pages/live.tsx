@@ -17,6 +17,7 @@ import { inputAtom } from "../jotai/input";
 import { statusAtom } from "../jotai/status";
 import { clientsAtom } from "../jotai/clients";
 import { docAtom } from "../jotai/doc";
+import config from "../config";
 
 const ContainerCSS = css`
   min-height: 100vh;
@@ -52,9 +53,9 @@ const PageIndex = () => {
   useEffect(() => {
     if (!!doc && !socket) {
       console.log("setting providers");
-      fetch("http://localhost:3000/api/socketio");
+      fetch(`${config?.URL}`);
       const socketIOProvider = new SocketIOProvider(
-        "ws://localhost:3000",
+        `${config?.WS_URL}`,
         "testing-doc",
         doc,
         {
