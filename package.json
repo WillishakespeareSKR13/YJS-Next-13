@@ -1,0 +1,24 @@
+{
+  "name": "next",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@stacklycore/ui": "^1.0.0-beta.22",
+    "jotai": "^1.10.0",
+    "next": "^13.0.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "socket.io": "^4.5.3",
+    "socket.io-client": "^4.5.3",
+    "ws": "^8.11.0",
+    "y-socket.io": "^1.1.0",
+    "yjs": "^13.5.42"
+  },
+  "devDependencies": {
+    "@types/node": "18.11.9",
+    "@types/react": "18.0.25",
+    "@types/ws": "^8.5.3",
+    "typescript": "4.8.4"
+  }
+}
