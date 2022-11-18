@@ -4,7 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "@stacklycore/ui": "^1.0.0-beta.25",
+    "@stacklycore/ui": "^1.0.0-beta.26",
+    "@tiptap/extension-collaboration": "^2.0.0-beta.202",
     "jotai": "^1.10.0",
     "next": "^13.0.3",
     "react": "^18.2.0",

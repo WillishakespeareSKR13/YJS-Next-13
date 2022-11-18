@@ -402,10 +402,10 @@
   resolved "https://registry.yarnpkg.com/@socket.io/component-emitter/-/component-emitter-3.1.0.tgz#96116f2a912e0c02817345b3c10751069920d553"
   integrity sha512-+9jVqKhRSpsc591z5vX+X5Yyw+he/HCB4iQ/RYxw35CEPaY1gnsNE43nf9n9AaYjAQrTiI/mOwKUKdUs9vf7Xg==
 
-"@stacklycore/ui@^1.0.0-beta.25":
-  version "1.0.0-beta.25"
-  resolved "https://registry.yarnpkg.com/@stacklycore/ui/-/ui-1.0.0-beta.25.tgz#c376d98c16afb07a8e5a7dd427752d7371170254"
-  integrity sha512-QSouOPY1x9fkUInk79bGJRLlQMZyIqdz2cbai1DY7rn/Ne5VKSNmFFhOg+IYWkeoCRbx6PKjdd4IrmQCziySpA==
+"@stacklycore/ui@^1.0.0-beta.26":
+  version "1.0.0-beta.26"
+  resolved "https://registry.yarnpkg.com/@stacklycore/ui/-/ui-1.0.0-beta.26.tgz#0d195e32038b1a30e024d8bc28db3473ae7aa483"
+  integrity sha512-HeG+RHKc1arqHIF9LQiRmNTzn5hSHiiTqUvE4Gj+ICo4Dt0K7YnvP76gbapHLc1IUUSb4kn43FAGwkjrWZiEwQ==
   dependencies:
     "@emotion/react" "^11.9.3"
     "@emotion/styled" "^11.9.3"
@@ -489,6 +489,14 @@
   version "2.0.0-beta.202"
   resolved "https://registry.yarnpkg.com/@tiptap/extension-code/-/extension-code-2.0.0-beta.202.tgz#5d4352a6cc4a2d16262472fb11c54cfca24bd40a"
   integrity sha512-XwAr7ysSWJVZWHNXDaNBTPH1CTyVxHnPv/PiCWTGhf8Fkx7R7xW2QCUKx4ablwxFlTY7H8xGmCujaewUQBdO5w==
+
+"@tiptap/extension-collaboration@^2.0.0-beta.202":
+  version "2.0.0-beta.202"
+  resolved "https://registry.yarnpkg.com/@tiptap/extension-collaboration/-/extension-collaboration-2.0.0-beta.202.tgz#320b0fc096df638772b1ad027041ecb89504a435"
+  integrity sha512-Y/ka56fDedpiPbQn8lyHO4EMk/CPJWsWaPO3AE2RNjlLDudUp1jS9ke5XeLkBi0q9+8AvicHjiDhgSnrQ/wxIw==
+  dependencies:
+    prosemirror-state "^1.4.1"
+    y-prosemirror "1.0.20"
 
 "@tiptap/extension-color@^2.0.0-beta.202":
   version "2.0.0-beta.202"
@@ -1754,6 +1762,13 @@ y-leveldb@^0.1.1:
   dependencies:
     level "^6.0.1"
     lib0 "^0.2.31"
+
+y-prosemirror@1.0.20:
+  version "1.0.20"
+  resolved "https://registry.yarnpkg.com/y-prosemirror/-/y-prosemirror-1.0.20.tgz#1832b5ab29852fc4607e9cf6b0c431e9caeed79e"
+  integrity sha512-LVMtu3qWo0emeYiP+0jgNcvZkqhzE/otOoro+87q0iVKxy/sMKuiJZnokfJdR4cn9qKx0Un5fIxXqbAlR2bFkA==
+  dependencies:
+    lib0 "^0.2.42"
 
 y-protocols@^1.0.5:
   version "1.0.5"

@@ -12,13 +12,14 @@ import WrapperComponent from "../components/WrapperComponent";
 import * as Y from "yjs";
 import { SocketIOProvider } from "y-socket.io";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { useAtom } from "jotai";
 import { socketAtom } from "../jotai/socket";
 import { inputAtom } from "../jotai/input";
 import { statusAtom } from "../jotai/status";
 import { clientsAtom } from "../jotai/clients";
 import { docAtom } from "../jotai/doc";
+import Collaboration from "@tiptap/extension-collaboration";
 import config from "../config";
 
 const ContainerCSS = css`
@@ -38,19 +39,28 @@ const PageIndex = () => {
   const [clients, setClients] = useAtom(clientsAtom);
   const [doc, setDoc] = useAtom(docAtom);
 
+  const docMemo = useMemo(
+    () =>
+      doc
+        ? [Collaboration.configure({
+            document: doc,
+          })]
+        : [],
+    [doc]
+  );
+
   const editor = useEditor(
     {
+      extensions: [...docMemo],
       content: input,
-      onUpdate: ({ editor }) => {
-        if (!doc) return;
-        doc.getMap("data").set("input", editor?.getHTML() ?? "");
-      },
     },
     [doc]
   );
 
   useEffect(() => {
-    editor?.commands?.setContent?.(input);
+    if (editor) {
+      editor?.commands?.setContent?.(input);
+    }
   }, [input]);
 
   useEffect(() => {
