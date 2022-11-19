@@ -1,6 +1,7 @@
 import {
   AtomButton,
   AtomIcon,
+  AtomInput,
   AtomText,
   AtomTextEditor,
   AtomWrapper,
@@ -14,7 +15,7 @@ import WrapperComponent from "../components/WrapperComponent";
 import * as Y from "yjs";
 import { SocketIOProvider } from "y-socket.io";
 
-import React, { useEffect, useMemo, useRef } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { useAtom } from "jotai";
 import { socketAtom } from "../jotai/socket";
 import { inputAtom } from "../jotai/input";
@@ -48,7 +49,7 @@ const colors = [
 
 const PageIndex = () => {
   const { key, toggle } = useTheme();
-  const canvas = useRef(null);
+  const [togglePointer, setTogglePointer] = useState(false);
   const [mouses, setMouses] = useAtom(mousesAtom);
   const [socket, setSocket] = useAtom(socketAtom);
   const [status, setStatus] = useAtom(statusAtom);
@@ -152,13 +153,25 @@ const PageIndex = () => {
   if (!socket) return <h1>Initializing provider...</h1>;
 
   return (
-    <AtomWrapper as="main" css={() => ContainerCSS}>
+    <AtomWrapper
+      as="main"
+      css={() => css`
+        ${ContainerCSS}
+        ${togglePointer &&
+        css`
+          cursor: none;
+          * {
+            cursor: none;
+          }
+        `}
+      `}
+    >
       <Header />
       {clients?.map((values) => {
         const mouse = mouses[values];
         const id = doc?.clientID;
         const color = colors[id % colors.length];
-        if (mouse?.id === id) return <></>;
+        if (mouse?.id === id && !togglePointer) return <></>;
         return (
           <React.Fragment key={mouse?.id}>
             <AtomWrapper
@@ -169,8 +182,12 @@ const PageIndex = () => {
                 background-color: transparent;
                 top: ${mouse?.y}px;
                 left: ${mouse?.x}px;
-                transform: translate(0, calc(-100% + 20px));
-                z-index: 999;
+                transform: translate(2px, calc(-100% + 20px));
+                z-index: 9999;
+                user-select: none;
+                * {
+                  user-select: none;
+                }
               `}
             >
               <AtomText
@@ -213,6 +230,15 @@ const PageIndex = () => {
         >
           StacklyUI
         </AtomText>
+        <WrapperComponent title={`See Mouse`} dot>
+          <AtomInput
+            type="toggle"
+            input={{
+              checked: togglePointer,
+              onChange: (e) => setTogglePointer((prev) => !prev),
+            }}
+          />
+        </WrapperComponent>
         <WrapperComponent title={`Component Theme: Active(${key})`} dot>
           <AtomButton
             astype={key === "dark" ? "flat" : "outline"}
